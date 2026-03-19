@@ -76,13 +76,11 @@
 							<artifactId>lombok</artifactId>
 						</path>
                         <path>
-                            <groupID>org.mapstruct</groupID>
-                            <artifactId>mapstruct-processor</artifactId>
+                            <groupId>org.mapstruct</groupId> <artifactId>mapstruct-processor</artifactId>
                             <version>${mapstruct.version}</version>
                         </path>
                         <path>
-                            <groupID>org.projectlombok</groupID>
-                            <artifactId>lombok-mapstruct-binding</artifactId>
+                            <groupId>org.projectlombok</groupId> <artifactId>lombok-mapstruct-binding</artifactId>
                             <version>${lombok-mapstruct-binding.version}</version>
                         </path>
 					</annotationProcessorPaths>
