@@ -1,4 +1,8 @@
 package io.github.cursodsousa.icompras.pedidos.model;
 
-public record ErroResposta() {
+public record ErroResposta(
+        String mensagem,
+        String campo,
+        String erro
+) {
 }

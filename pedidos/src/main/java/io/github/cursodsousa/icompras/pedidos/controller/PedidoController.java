@@ -2,7 +2,9 @@ package io.github.cursodsousa.icompras.pedidos.controller;
 
 import io.github.cursodsousa.icompras.pedidos.controller.dto.NovoPedidoDTO;
 import io.github.cursodsousa.icompras.pedidos.mappers.PedidoMapper;
+import io.github.cursodsousa.icompras.pedidos.model.ErroResposta;
 import io.github.cursodsousa.icompras.pedidos.model.Pedido;
+import io.github.cursodsousa.icompras.pedidos.model.exeception.ValidationException;
 import io.github.cursodsousa.icompras.pedidos.service.PedidoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,9 +25,14 @@ public class PedidoController {
 
     @PostMapping
     public ResponseEntity<Object> criar(@RequestBody NovoPedidoDTO dto){
-        var pedido = mapper.map(dto);
 
-        Pedido novoPedido = service.criarPedido(pedido);
-        return ResponseEntity.ok(novoPedido.getCodigo());
+        try {
+            var pedido = mapper.map(dto);
+            Pedido novoPedido = service.criarPedido(pedido);
+            return ResponseEntity.ok(novoPedido.getCodigo());
+        } catch (ValidationException e){
+            var erro = new ErroResposta("Erro validação", e.getField(), e.getMessage());
+            return ResponseEntity.badRequest().body(erro);
+        }
     }
 }
